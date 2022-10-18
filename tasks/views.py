@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -44,11 +45,11 @@ def tasks_completed(request):
     tasks = Tasks.objects.filter(user=request.user,datecompleted__isnull=False)
     return render(request, 'tasks.html', {'tasks':tasks})
 
-def tasks_remove(request,task_id):
+"""def tasks_remove(request,task_id):
     if request.method == 'POST':
         task = get_object_or_404(Tasks, pk=task_id, user=request.user)
         task.delete()
-        return redirect('tasks')
+        return redirect('tasks')"""
 
 @login_required
 def signout(request):
@@ -97,9 +98,9 @@ def task_detail(request,task_id):
     return redirect('tasks')
 
 
-def task_complete(request,task_id):
+"""def task_complete(request,task_id):
     task = get_object_or_404(Tasks, pk=task_id, user=request.user)
     if request.method == 'POST':
         task.datecompleted= timezone.now()
         task.save()
-        return redirect("tasks")
+        return redirect("tasks")"""
